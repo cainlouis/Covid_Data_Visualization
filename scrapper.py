@@ -44,5 +44,8 @@ class Scrapper:
                 cols.append(text)
             if not cols[0] == "" and not cols[0] == "#":
                 cols.append(date.isoformat())
-                t.append(cols)
+                # Remove the first index of the cols because it serves no purpose
+                # It is not a unique number and depending on the day a different number 
+                # is given to a different country, it is inconsistent
+                t.append(cols[1:])
         return t
