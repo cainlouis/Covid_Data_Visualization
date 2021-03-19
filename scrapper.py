@@ -30,8 +30,7 @@ class Scrapper:
             cols = []
             for td in tr.find_all(['td', 'th']):
                 td_text = td.get_text(strip=True) 
-                if len(td_text):
-                    cols.append(td_text)
+                cols.append(td_text)
             self.today.append(cols)
 
         # Create list of data for yesterday
@@ -41,8 +40,7 @@ class Scrapper:
             cols = []
             for td in tr.find_all(['td', 'th']):
                 td_text = td.get_text(strip=True) 
-                if len(td_text):
-                    cols.append(td_text)
+                cols.append(td_text)
             self.yesterday.append(cols)
 
         # Create list of data for 2 days ago
@@ -52,6 +50,5 @@ class Scrapper:
             cols = []
             for td in tr.find_all(['td', 'th']):
                 td_text = td.get_text(strip=True) 
-                if len(td_text):
-                    cols.append(td_text)
+                cols.append(td_text)
             self.yesterday2.append(cols)
