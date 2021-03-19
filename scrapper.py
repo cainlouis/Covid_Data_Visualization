@@ -25,37 +25,24 @@ class Scrapper:
         table_yesterday2 = table_containers.find("table", id="main_table_countries_yesterday2")
 
         # Create list of data for today
-        self.today = []
-
-        for tr in table_today.find_all('tr'):
-            cols = []
-            for td in tr.find_all(['td', 'th']):
-                td_text = td.get_text(strip=True) 
-                cols.append(td_text)
-            # Add today's date to the coloumns
-            cols.append(datetime.date.today().isoformat())
-            self.today.append(cols)
+        self.today = self.__filter_table(table_today, datetime.date.today())
 
         # Create list of data for yesterday
-        self.yesterday = []
-
-        for tr in table_yesterday.find_all('tr'):
-            cols = []
-            for td in tr.find_all(['td', 'th']):
-                td_text = td.get_text(strip=True) 
-                cols.append(td_text)
-            # Add yesterday's date to the end of the coloumns
-            cols.append((datetime.date.today() - datetime.timedelta(1)).isoformat())
-            self.yesterday.append(cols)
+        self.yesterday = self.__filter_table(table_yesterday, datetime.date.today() - datetime.timedelta(1))
 
         # Create list of data for 2 days ago
-        self.yesterday2 = []
+        self.yesterday2 = self.__filter_table(table_yesterday2, datetime.date.today() - datetime.timedelta(2))
 
-        for tr in table_yesterday2.find_all('tr'):
+    # Parse the table html and filter out useless rows and add the appropriate date
+    def __filter_table(self, table, date):
+        # t: Initialized filtered list
+        t = []
+        for tr in table.find_all("tr"):
             cols = []
-            for td in tr.find_all(['td', 'th']):
-                td_text = td.get_text(strip=True) 
-                cols.append(td_text)
-            # Add two days ago's date to the end of the coloumns
-            cols.append((datetime.date.today() - datetime.timedelta(2)).isoformat())
-            self.yesterday2.append(cols)
+            for td in tr.find_all(["td", "th"]):
+                text = td.get_text(strip=True)
+                cols.append(text)
+            if not cols[0] == "" and not cols[0] == "#":
+                cols.append(date.isoformat())
+                t.append(cols)
+        return t
