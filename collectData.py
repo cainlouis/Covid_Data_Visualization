@@ -32,5 +32,21 @@ for tr in table_today.find_all('tr'):
           cols.append(td_text)
     rows.append(cols)
     
+for tr in table_yesterday.find_all('tr'):
+    cols = []
+    for td in tr.find_all(['td', 'th']):
+       td_text = td.get_text(strip=True) 
+       if len(td_text):
+          cols.append(td_text)
+    rows.append(cols)
+    
+for tr in table_yesterday2.find_all('tr'):
+    cols = []
+    for td in tr.find_all(['td', 'th']):
+       td_text = td.get_text(strip=True) 
+       if len(td_text):
+          cols.append(td_text)
+    rows.append(cols)
+    
 print(rows)
 
