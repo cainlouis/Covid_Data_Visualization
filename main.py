@@ -5,7 +5,7 @@ from createjson import CreateJson
 from archivedata import ArchiveData
 
 s = Scrapper()
-
+'''
 #print to verify the data
 print("-- TODAY --")
 for i in s.today:
@@ -18,7 +18,7 @@ for i in s.yesterday:
 print("-- YESTERDAY II --")
 for i in s.yesterday2:
     print(i)
-
+'''
 #Create one big list to send to createjson
 allData = s.today + s.yesterday + s.yesterday2
 

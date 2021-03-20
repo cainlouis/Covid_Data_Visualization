@@ -41,6 +41,12 @@ class Scrapper:
             cols = []
             for td in tr.find_all(["td", "th"]):
                 text = td.get_text(strip=True)
+                text = str(text).replace(',', '')
+                text = str(text).replace('+', '')
+                #if not text:
+                    #text = 'NULL'
+                #if text == 'N/A':
+                    #text = 'NULL'
                 cols.append(text)
             if not cols[0] == "" and not cols[0] == "#":
                 cols.append(date.isoformat())
