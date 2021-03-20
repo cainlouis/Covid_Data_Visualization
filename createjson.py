@@ -13,7 +13,6 @@ class CreateJson:
         
     def write2file(self, data):
         with open(self.__filename, 'w') as write_file:
-            for aday in data:
-                for alist in aday:
-                    json.dump(alist, write_file)
-                    write_file.write('\n')
+            for alist in data:
+                json.dump(alist, write_file)
+                write_file.write('\n')

@@ -20,7 +20,7 @@ for i in s.yesterday2:
     print(i)
 
 #Create one big list to send to createjson
-allData = [s.today, s.yesterday, s.yesterday2]
+allData = s.today + s.yesterday + s.yesterday2
 
 filename = 'country_neighbour_dist_file.json'
 #Create the CreateJson object
