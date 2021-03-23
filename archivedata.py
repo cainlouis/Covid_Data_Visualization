@@ -8,12 +8,14 @@ Created on Fri Mar 19 21:27:25 2021
 import mysql.connector
 import json
 
+#This class get the file from parent class and connect to the db to add the data from the json file 
 class ArchiveData:
     def __init__(self, filename):
         self.__filename = filename
         self.__mydb = self.__connectiontodb()
         self.__cursor = self.__mydb.cursor(buffered = True)
-        
+    
+    #connect to the db with the information we get as input then return the connection
     def __connectiontodb(self):
         mydb = mysql.connector.connect(
             host='localhost',
@@ -24,13 +26,16 @@ class ArchiveData:
         
         print(mydb)
         return mydb
-        
+    
+    #creates the table covid and call insert data    
     def createtable(self):
+        #If the table covid already exist drop it else print that it is not in db
         try:
             self.__cursor.execute('DROP TABLE IF EXISTS covid')
             print('covid has been dropped')
         except mysql.connector.Error:
             print('covid is not in database')
+        #Create the table
         self.__cursor.execute('CREATE TABLE covid (\
             country VARCHAR(255), \
             totalcases INT, \
@@ -52,13 +57,17 @@ class ArchiveData:
             1test_every_x_ppl INT, \
             day DATE)')
         self.__mydb.commit()
+        #then call insertdata
         self.__insertdata()
-        
+    
+    #insert the data we get from the  json file to the database
     def __insertdata(self):
         data = []
+        #for every line in the json line append it to data
         for line in open(self.__filename, 'r'):
             data.append(json.loads(line))
             #print(data)
+        #then insert it to the db
         for line in data:
             print(line)
             query = 'INSERT INTO covid VALUES (%s, %s,  %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'
