@@ -41,14 +41,17 @@ class Scrapper:
             cols = []
             for td in tr.find_all(["td", "th"]):
                 text = td.get_text(strip=True)
+                # Remove special characters
                 text = str(text).replace(',', '')
                 text = str(text).replace('+', '')
-                #if not text:
-                    #text = 'NULL'
-                #if text == 'N/A':
-                    #text = 'NULL'
+                # If text is empty, replace it with None
+                if not text:
+                    text = None
+                elif text == 'N/A':
+                    text = None
                 cols.append(text)
-            if not cols[0] == "" and not cols[0] == "#":
+            # Remove non-country rows
+            if not cols[0] == "" and not cols[0] == "#" and not cols[1] == "Total:":
                 cols.append(date.isoformat())
                 # Remove the first index of the cols because it serves no purpose
                 # It is not a unique number and depending on the day a different number 
