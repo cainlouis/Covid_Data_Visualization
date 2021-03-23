@@ -7,8 +7,9 @@ Created on Fri Mar 19 18:33:21 2021
 """
 import json
 
+
 #This class write in a json file
-class CreateJson:
+class JsonCreator:
     def __init__(self, filename):
         self.__filename = filename
         

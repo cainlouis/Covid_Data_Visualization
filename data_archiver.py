@@ -9,7 +9,7 @@ import mysql.connector
 import json
 
 #This class get the file from parent class and connect to the db to add the data from the json file 
-class ArchiveData:
+class DataArchiver: 
     def __init__(self, filename):
         self.__filename = filename
         self.__mydb = self.__connectiontodb()
