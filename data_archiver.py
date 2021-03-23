@@ -74,4 +74,6 @@ class DataArchiver:
             self.__cursor.execute(query, line)
         self.__mydb.commit()
         self.__cursor.close()
-            
+    
+    def getConnection(self):
+        return self.__mydb

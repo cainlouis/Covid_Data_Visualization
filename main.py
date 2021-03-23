@@ -3,6 +3,7 @@
 from scrapper import Scrapper
 from json_creator import JsonCreator
 from data_archiver import DataArchiver
+from data_analysis import DataAnalysis
 
 s = Scrapper()
 
@@ -35,6 +36,13 @@ db = DataArchiver(filename)
 
 #Call the createtable to create the table
 db.createtable()
+
+#get the connection for the other class
+#connection = db.getConnection()
+
+#create dataAnalysis object
+
+
 
 print("done!")
 
