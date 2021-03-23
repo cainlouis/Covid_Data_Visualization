@@ -8,7 +8,7 @@ Created on Fri Mar 19 21:27:25 2021
 import mysql.connector
 import json
 
-class ArchiveData:
+class DataArchiver:
     def __init__(self, filename):
         self.__filename = filename
         self.__mydb = self.__connectiontodb()
