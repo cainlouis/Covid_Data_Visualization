@@ -3,7 +3,7 @@
 from scrapper import Scrapper
 from json_creator import JsonCreator
 from data_archiver import DataArchiver
-from data_analysis import DataAnalysis
+from data_analyzer import DataAnalyzer
 
 s = Scrapper()
 
@@ -21,28 +21,32 @@ print("-- YESTERDAY II --")
 for i in s.yesterday2:
     print(i)
 '''
-#Create one big list to send to createjson
+# Create one big list to send to createjson
 allData = s.today + s.yesterday + s.yesterday2
 
 filename = 'country_neighbour_dist_file.json'
-#Create the CreateJson object
+# Create the JsonCreator object
 jsn = JsonCreator(filename)
 
-#Call write2file to write the json file
+# Call write2file to write the json file
 jsn.write2file(allData)
 
-#Create the archivedata object
+# Create the archivedata object
 db = DataArchiver(filename)
 
-#Call the createtable to create the table
+# Call the createtable to create the table
 db.createtable()
 
-#get the connection for the other class
-#connection = db.getConnection()
+# Re use the db connection
+connection = db.get_connection()
 
-#create dataAnalysis object
+# Create the DataAnalyzer object
+analyzer = DataAnalyzer(connection)
 
+analyzer.analyze(["Canada", "Colombia"])
 
+# Close the db connection!
+connection.close()
 
 print("done!")
 

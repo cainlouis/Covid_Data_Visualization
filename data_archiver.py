@@ -75,5 +75,5 @@ class DataArchiver:
         self.__mydb.commit()
         self.__cursor.close()
     
-    def getConnection(self):
+    def get_connection(self):
         return self.__mydb
