@@ -38,7 +38,9 @@ class BarPlot:
                 country_list[2]: death_list[2],
                 country_list[3]: death_list[3],
                 country_list[4]: death_list[4]}
-        
+            
+            #print statement for readability  
+            print('\n')
             print(death_dict)
            
             #And then create the bar plot for the dictionary
@@ -52,6 +54,9 @@ class BarPlot:
             plt.title('Deaths Per Millions Today')
             plt.legend(labels=['Deaths/1m'])
             plt.show()
+            
+            #print statement for readability  
+            print('\n')
         except mysql.connector.Error:
             print('Could not find the deaths_per_1m')
             
@@ -91,6 +96,8 @@ class BarPlot:
             plt.legend(labels=['TotalrecoveredToday'])
             plt.show()
             
+            #print statement for readability  
+            print('\n')
             #call total tests to compare graph
             self.__totaltest()
         except mysql.connector.Error:

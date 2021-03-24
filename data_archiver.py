@@ -17,15 +17,18 @@ class DataArchiver:
     
     #connect to the db with the information we get as input then return the connection
     def __connectiontodb(self):
-        mydb = mysql.connector.connect(
-            host='localhost',
-            user= input('Enter username for db: '),
-            password= input('Enter password for db: '),
-            auth_plugin='mysql_native_password',
-            database= input('Enter database: '))
+        try:
+            mydb = mysql.connector.connect(
+                host='localhost',
+                user= input('Enter username for db: '),
+                password= input('Enter password for db: '),
+                auth_plugin='mysql_native_password',
+                database= input('Enter database: '))
         
-        print(mydb)
-        return mydb
+            print(mydb)
+            return mydb
+        except mysql.connector.Error:
+            print('Could not connect to database')
     
     #creates the table covid and call insert data    
     def createtable(self):
