@@ -1,4 +1,10 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Mar 15 21:41:56 2021
 
+@author: Sergio Segrera & Nael Louis
+@id: 1933693, 1934115
+"""
 
 from scrapper import Scrapper
 from json_creator import JsonCreator

@@ -89,9 +89,10 @@ class BarPlot:
             #And then create the bar plot for the dictionary
             plt.bar(range(len(recovered_dict)), list(recovered_dict.values()), align='center')
             plt.xticks(range(len(recovered_dict)), list(recovered_dict.keys()))
-            #the limit of the  y axis was already correct so i didn't write one
+            plt.ylim([0, 12000000])
+            plt.yticks(np.arange(0, 12000000, 2000000))
             #Create the labels for the graph
-            plt.ylabel('Total recovered per 10 thousands')
+            plt.ylabel('Total recovered (10 millions)')
             plt.title('Total Recovered Today')
             plt.legend(labels=['TotalrecoveredToday'])
             plt.show()
@@ -132,7 +133,7 @@ class BarPlot:
             plt.ylim([0, 135000000])
             plt.yticks(np.arange(0, 135000000, 15000000))
             #then the labels ofthe graph
-            plt.ylabel('Total tests per 100 millions')
+            plt.ylabel('Total tests (100 millions)')
             plt.title('Total Tests Today')
             plt.legend(labels=['TotalTestsToday'])
             plt.show()
