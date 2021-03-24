@@ -40,15 +40,6 @@ db = DataArchiver(filename)
 # Call the createtable to create the table
 db.createtable()
 
-#create dataAnalysis object
-
-#create plot object
-#plot = BarPlot(user, pw, db)
-
-#plot.totaldeath()
-
-#plot.totalrecovered()
-
 # Re use the db connection
 connection = db.get_connection()
 
@@ -58,11 +49,11 @@ analyzer = DataAnalyzer(connection)
 analyzer.analyze(["Canada", "Colombia"])
 
 #create plot object
-#plot = BarPlot(user, pw, db)
+plot = BarPlot(connection)
 
-#plot.totaldeath()
+plot.totaldeath()
 
-#plot.totalrecovered()
+plot.totalrecovered()
 
 # Close the db connection!
 connection.close()
