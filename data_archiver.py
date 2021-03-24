@@ -10,11 +10,8 @@ import json
 
 #This class get the file from parent class and connect to the db to add the data from the json file 
 class DataArchiver: 
-    def __init__(self, filename, user, pw, db):
+    def __init__(self, filename):
         self.__filename = filename
-        self.__user = user
-        self.__pw = pw
-        self.__db = db
         self.__mydb = self.__connectiontodb()
         self.__cursor = self.__mydb.cursor(buffered = True)
     
@@ -22,10 +19,10 @@ class DataArchiver:
     def __connectiontodb(self):
         mydb = mysql.connector.connect(
             host='localhost',
-            user= self.__user,
-            password= self.__pw,
+            user= input('Enter username for db: '),
+            password= input('Enter password for db: '),
             auth_plugin='mysql_native_password',
-            database= self.__db)
+            database= input('Enter database: '))
         
         print(mydb)
         return mydb
@@ -82,5 +79,5 @@ class DataArchiver:
         except mysql.connector.Error:
             print('Could not insert the data')
     
-    def getConnection(self):
+    def get_connection(self):
         return self.__mydb
