@@ -6,6 +6,8 @@ Created on Tue Mar 23 16:07:39 2021
 @id: 1933693, 1934115
 """
 import datetime
+import pandas as pd
+import matplotlib.pyplot as plt
 
 class DataAnalyzer:
     def __init__(self, connection):
@@ -13,7 +15,7 @@ class DataAnalyzer:
         self.__cursor = self.__mydb.cursor(buffered = True)
 
     def __get_country_information(self, country, date):
-        self.__cursor.execute("SELECT * FROM covid WHERE country = %s AND day = %s", (country, date.isoformat()))
+        self.__cursor.execute("SELECT totalcases, newcases, deaths_per_1m, tests_per_1m FROM covid WHERE country = %s AND day = %s", (country, date.isoformat()))
 
         return self.__cursor.fetchone()
 
@@ -27,7 +29,15 @@ class DataAnalyzer:
             yesterday = self.__get_country_information(country, datetime.date.today() - datetime.timedelta(1))
             yesterday2 = self.__get_country_information(country, datetime.date.today() - datetime.timedelta(2))
 
-            print(yesterday2)
-            # TODO: Calculate change
+            combined = []
+            combined.append(yesterday2)
+            combined.append(yesterday)
+            combined.append(today)
+
+            df = pd.DataFrame(combined, index=["2 days ago", "yesterday", "today"], columns=["totalcases", "newcases", "deaths_per_1m", "tests_per_1m"])
+            plot = df.pct_change().fillna(0).plot(title=country)
+            plot.set_ylabel("% change")
+
+            plt.show()
 
         self.__cursor.close()
