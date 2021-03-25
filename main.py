@@ -52,7 +52,7 @@ connection = db.get_connection()
 # Create the DataAnalyzer object
 analyzer = DataAnalyzer(connection)
 
-analyzer.analyze(["Canada", "Colombia"])
+analyzer.analyze([input("Enter country to analyze > "), "Canada", "France", "USA", "China"])
 
 #create plot object
 plot = BarPlot(connection)
