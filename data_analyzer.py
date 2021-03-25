@@ -5,6 +5,7 @@ Created on Tue Mar 23 16:07:39 2021
 @author: Sergio Segrera & Nael Louis
 @id: 1933693, 1934115
 """
+import mysql.connector
 import datetime
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -15,8 +16,10 @@ class DataAnalyzer:
         self.__cursor = self.__mydb.cursor(buffered = True)
 
     def __get_country_information(self, country, date):
-        self.__cursor.execute("SELECT totalcases, newcases, deaths_per_1m, tests_per_1m FROM covid WHERE country = %s AND day = %s", (country, date.isoformat()))
-
+        try:
+            self.__cursor.execute("SELECT totalcases, newcases, deaths_per_1m, tests_per_1m FROM covid WHERE country = %s AND day = %s", (country, date.isoformat()))
+        except mysql.connector.Error:
+            print("Could not retrieve information for " + country)
         return self.__cursor.fetchone()
 
 
