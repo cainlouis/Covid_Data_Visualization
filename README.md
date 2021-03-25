@@ -12,4 +12,8 @@ data_archiver.py: which inserts in the database of the user the data found in th
 data_analyser.py: which analyzes the data of 5 countries
 bar_plot.py: which create a bar plot for 3 informations; the deaths per millions of today, the total recovered today, the total tests today. There's 5 countries in each bar_plot  
 
-Run main.py to operate the project
+Run main.py to operate the project 
+
+First enter the required information to create a connection to a mysql database. The program assumes you are running the db in localhost and using the default port.
+
+The program will then ask the user to input a country to compare differences in key covid numbers.
